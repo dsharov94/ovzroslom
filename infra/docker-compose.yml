@@ -1,0 +1,26 @@
+services:
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [webnet]
+  site:
+    build:
+      context: ../apps/site
+      dockerfile: Dockerfile
+    container_name: ovz-site
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks: [webnet]
+
+networks:
+  webnet:
+
+volumes:
+  caddy_data:
+  caddy_config:

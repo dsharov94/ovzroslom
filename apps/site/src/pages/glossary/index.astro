@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const title = 'Глоссарий — ovzroslom.ru';
+const description = 'Короткие определения и справка по темам интимного здоровья.';
+const url = 'https://ovzroslom.ru/glossary/';
+---
+<Base {title} {description}>
+  <Seo {title} {description} {url} breadcrumbs={[{ name: 'Главная', url: '/' }, { name: 'Глоссарий', url: '/glossary/' }]} />
+  <h1 class="text-2xl font-semibold mb-4">Глоссарий</h1>
+  <p>Короткие определения и справка по темам интимного здоровья.</p>
+</Base>

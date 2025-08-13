@@ -1,0 +1,50 @@
+---
+/** Простой age-gate:
+ * - Без React, работает в любом браузере
+ * - Сохраняет выбор в localStorage ('ovz_age_ok' = '1')
+ * - Если уже подтверждено — сразу показывает контент
+ */
+const { } = Astro.props;
+---
+
+<div id="age-gate" class="max-w-xl mx-auto p-6 rounded-2xl bg-white/5 border border-white/10 hidden">
+  <h1 class="text-2xl font-semibold mb-2">Вам уже исполнилось 18 лет?</h1>
+  <p class="mb-4 opacity-80">Сайт — об интимном здоровье и образовании. Без откровенных материалов.</p>
+  <div class="flex gap-3">
+    <button id="age-yes" class="px-4 py-2 rounded-xl bg-white/10">Да</button>
+    <a class="px-4 py-2 rounded-xl bg-white/10" href="https://google.com">Нет</a>
+  </div>
+</div>
+
+<div id="age-content" class="hidden">
+  <slot />
+</div>
+
+<script>
+  (function () {
+    try {
+      var ok = (typeof localStorage !== 'undefined') && localStorage.getItem('ovz_age_ok') === '1';
+      var gate = document.getElementById('age-gate');
+      var content = document.getElementById('age-content');
+      if (ok) {
+        if (content) content.classList.remove('hidden');
+      } else {
+        if (gate) gate.classList.remove('hidden');
+      }
+      var btn = document.getElementById('age-yes');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          try { localStorage.setItem('ovz_age_ok', '1'); } catch (e) {}
+          if (gate) gate.classList.add('hidden');
+          if (content) content.classList.remove('hidden');
+        });
+      }
+    } catch (e) {
+      // Если localStorage недоступен — просто показываем контент (лучше, чем «заблокировать навсегда»)
+      var gate = document.getElementById('age-gate');
+      var content = document.getElementById('age-content');
+      if (gate) gate.classList.add('hidden');
+      if (content) content.classList.remove('hidden');
+    }
+  })();
+</script>

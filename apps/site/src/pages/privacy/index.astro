@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const url = 'https://ovzroslom.ru/privacy/';
+const title = 'Политика конфиденциальности — ovzroslom.ru';
+const description = 'Как мы обрабатываем данные, использование Яндекс.Метрики (без Webvisor).';
+---
+<Base {title} {description}>
+  <Seo title={title} description={description} url={url} />
+  <h1 class="text-2xl font-semibold mb-4">Политика конфиденциальности</h1>
+
+  <p class="mb-4">Этот сайт носит образовательный характер (18+) и не публикует откровенный контент. Мы собираем минимум данных для улучшения качества материалов и навигации.</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Что мы собираем</h2>
+  <ul class="list-disc pl-5 space-y-1">
+    <li>просматриваемые страницы и разделы;</li>
+    <li>источники переходов;</li>
+    <li>сведения о браузере и устройстве (обезличенно);</li>
+    <li>анонимные события (клики/скролл) без записи сессий.</li>
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Инструмент аналитики</h2>
+  <p class="mb-4">Мы используем Яндекс.Метрику (ООО «ЯНДЕКС»). Скрипт загружается с <code>https://mc.yandex.ru</code>. Вебвизор (Webvisor) <strong>выключен</strong>.</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Правовое основание</h2>
+  <p class="mb-4">Наш законный интерес — измерение аудитории и качества контента, улучшение навигации. Мы минимизируем данные и не используем профилирование.</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Куки и отказ</h2>
+  <p class="mb-4">Метрика может использовать технические cookie для корректной работы счётчика. Мы не используем сторонние рекламные cookie. Вы можете запретить сбор данных, отключив JavaScript в браузере или используя блокировщики трекинга.</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Передача и хранение</h2>
+  <p class="mb-4">Обезличенные данные передаются на сервера Яндекс и обрабатываются по правилам Яндекса. Подробнее см. <a href="https://yandex.ru/legal/confidential/" rel="nofollow">Политику конфиденциальности Яндекса</a>.</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Контакты</h2>
+  <p class="mb-8">Вопросы по приватности: <a href="mailto:privacy@ovzroslom.ru">privacy@ovzroslom.ru</a>.</p>
+</Base>

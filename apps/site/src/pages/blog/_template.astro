@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const title = 'Заголовок статьи — ovzroslom.ru';
+const description = 'Короткое описание на 1–2 предложения. 18+ образовательный формат.';
+const url = 'https://ovzroslom.ru/blog/slug/';
+const faq = [
+  { q: 'Короткий вопрос №1?', a: 'Короткий и ясный ответ.' },
+  { q: 'Короткий вопрос №2?', a: 'Короткий и ясный ответ.' },
+];
+const ldArticle = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: title, description, author: { '@type': 'Organization', name: 'ovzroslom.ru' },
+  publisher: { '@type': 'Organization', name: 'ovzroslom.ru' }, mainEntityOfPage: url
+};
+const ldFAQ = { '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map(i => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } }))
+};
+---
+<Base {title} {description}>
+  <Seo {title} {description} {url} image="/og/og-default.jpg"
+       breadcrumbs={[{ name: 'Главная', url: '/' }, { name: 'Блог', url: '/blog/' }, { name: title, url: '/blog/slug/' }]} />
+  <script type="application/ld+json">{JSON.stringify(ldArticle)}</script>
+  <script type="application/ld+json">{JSON.stringify(ldFAQ)}</script>
+
+  <h1 class="text-3xl font-bold mb-4">{title}</h1>
+  <p class="opacity-80 mb-6">{description}</p>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">TL;DR</h2>
+  <ul class="list-disc pl-5 space-y-1">
+    <li>Самый важный вывод №1</li>
+    <li>Самый важный вывод №2</li>
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Мифы и факты</h2>
+  <ul class="list-disc pl-5 space-y-1">
+    <li><strong>Миф:</strong> … <br/><strong>Факт:</strong> …</li>
+  </ul>
+
+  <h2 class="text-xl font-semibold mt-6 mb-2">Основной текст</h2>
+  <p>Структурируй на короткие абзацы, списки и подзаголовки H2/H3.</p>
+</Base>

@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const title = 'Безопасный секс 101: базовые практики';
+const description = 'Как снизить риски и сохранить удовольствие: защита, согласие, проверенные источники. 18+.';
+const url = 'https://ovzroslom.ru/blog/bezopasnyy-seks-101/';
+const faq = [
+  { q: 'Всегда ли нужен презерватив?', a: 'Да для новых/немоногамных контактов; снижает риски ИППП и незапланированной беременности.' },
+  { q: 'Что насчёт смазки?', a: 'Смазка уменьшает трение и микротравмы; подбирайте по совместимости с презервативами.' }
+];
+const ldArticle = { '@context': 'https://schema.org','@type':'Article',headline:title,description,author:{'@type':'Organization',name:'ovzroslom.ru'},publisher:{'@type':'Organization',name:'ovzroslom.ru'},mainEntityOfPage:url };
+const ldFAQ = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faq.map(i=>({'@type':'Question',name:i.q,acceptedAnswer:{'@type':'Answer',text:i.a}})) };
+---
+<Base {title} {description}>
+  <Seo {title} {description} {url} image="/og/og-default.jpg"
+    breadcrumbs={[{name:'Главная',url:'/'},{name:'Блог',url:'/blog/'},{name:title,url:'/blog/bezopasnyy-seks-101/'}]}/>
+  <script type="application/ld+json">{JSON.stringify(ldArticle)}</script>
+  <script type="application/ld+json">{JSON.stringify(ldFAQ)}</script>
+
+  <h1 class="text-3xl font-bold mb-4">{title}</h1>
+  <h2 class="text-xl font-semibold mt-6 mb-2">TL;DR</h2>
+  <ul class="list-disc pl-6 space-y-1">
+    <li>Используйте защиту, обсуждайте границы и сигналы.</li>
+    <li>Проверяйте информацию по надёжным источникам.</li>
+  </ul>
+</Base>

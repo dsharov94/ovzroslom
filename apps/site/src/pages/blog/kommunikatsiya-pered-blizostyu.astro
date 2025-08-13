@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const title = 'Коммуникация с партнёром перед близостью: чек‑лист';
+const description = 'Простой сценарий разговора о границах, согласии и ожиданиях. 18+.';
+const url = 'https://ovzroslom.ru/blog/kommunikatsiya-pered-blizostyu/';
+const faq = [
+  { q: 'Как начать разговор без неловкости?', a: 'Согласуйте время, используйте «я‑сообщения», начните с ожиданий и безопасных тем.' },
+  { q: 'Что обсудить обязательно?', a: 'Границы, стоп‑слова, защиту/здоровье, предпочтения и триггеры.' }
+];
+const ldArticle = { '@context': 'https://schema.org','@type':'Article',headline:title,description,author:{'@type':'Organization',name:'ovzroslom.ru'},publisher:{'@type':'Organization',name:'ovzroslom.ru'},mainEntityOfPage:url };
+const ldFAQ = { '@context':'https://schema.org','@type':'FAQPage', mainEntity: faq.map(i=>({'@type':'Question',name:i.q,acceptedAnswer:{'@type':'Answer',text:i.a}})) };
+---
+<Base {title} {description}>
+  <Seo {title} {description} {url} image="/og/og-default.jpg"
+    breadcrumbs={[{name:'Главная',url:'/'},{name:'Блог',url:'/blog/'},{name:title,url:'/blog/kommunikatsiya-pered-blizostyu/'}]}/>
+  <script type="application/ld+json">{JSON.stringify(ldArticle)}</script>
+  <script type="application/ld+json">{JSON.stringify(ldFAQ)}</script>
+
+  <h1 class="text-3xl font-bold mb-4">{title}</h1>
+  <h2 class="text-xl font-semibold mt-6 mb-2">Чек‑лист</h2>
+  <ul class="list-disc pl-6 space-y-1">
+    <li>Согласие добровольное и обратимое.</li>
+    <li>Стоп‑слово: «жёлтый/красный».</li>
+    <li>Защита и здоровье: презервативы, тесты по необходимости.</li>
+    <li>Границы: что ок/не ок сегодня.</li>
+    <li>Ожидания: темп, формат, приватность.</li>
+  </ul>
+</Base>

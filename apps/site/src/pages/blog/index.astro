@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import Seo from '../../components/Seo.astro';
+const title = 'Блог — ovzroslom.ru';
+const description = 'Образовательные статьи, гайды по безопасности и согласию. 18+.';
+const url = 'https://ovzroslom.ru/blog/';
+---
+<Base {title} {description}>
+  <Seo {title} {description} {url} breadcrumbs={[{ name: 'Главная', url: '/' }, { name: 'Блог', url: '/blog/' }]} />
+  <h1 class="text-2xl font-semibold mb-4">Блог</h1>
+  <ul class="list-disc pl-5">
+    <li><a href="/blog/bezopasnost-i-soglasie/">Безопасность и согласие: базовый гайд</a></li>
+    <li><a href="/blog/kommunikatsiya-pered-blizostyu/">Коммуникация перед близостью: чек‑лист</a></li>
+    <li><a href="/blog/bezopasnyy-seks-101/">Безопасный секс 101: базовые практики</a></li>
+  </ul>
+</Base>
