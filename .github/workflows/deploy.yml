@@ -1,0 +1,52 @@
+name: Deploy to VPS true
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Ensure secrets are present
+        run: |
+          test -n "${{ secrets.DEPLOY_SSH_KEY }}" || (echo "DEPLOY_SSH_KEY is empty" && exit 1)
+          test -n "${{ secrets.DEPLOY_HOST }}" || (echo "DEPLOY_HOST is empty" && exit 1)
+          test -n "${{ secrets.DEPLOY_USER }}" || (echo "DEPLOY_USER is empty" && exit 1)
+
+      - name: Start SSH agent and add key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Deploy over SSH
+        env:
+          HOST: ${{ secrets.DEPLOY_HOST }}
+          USER: ${{ secrets.DEPLOY_USER }}
+          PORT: ${{ secrets.DEPLOY_PORT || '22' }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -p "$PORT" "$USER@$HOST" <<'SSHCMDS'
+            set -euxo pipefail
+            if [ ! -d ~/ovzroslom/.git ]; then
+              echo "==> Cloning repository..."
+              git clone -b main git@github.com:dsharov94/ovzroslom.git ~/ovzroslom
+            fi
+            cd ~/ovzroslom
+            echo "==> Fetching latest code..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Building and restarting containers..."
+            if [ -f infra/docker-compose.yml ]; then
+              cd infra
+              docker compose pull || docker-compose pull || true
+              docker compose up -d --build || docker-compose up -d --build
+            else
+              echo "[!] docker-compose.yml not found in infra/"
+            fi
+          SSHCMDS
