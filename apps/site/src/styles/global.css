@@ -3,3 +3,7 @@
 @tailwind utilities;
 :root { --bg: #0b0b0c; --fg: #fafafa; }
 body { background: var(--bg); color: var(--fg); }
+
+:root { --ring: 2px; --ring-offset: 2px; }
+:focus-visible { outline: var(--ring) solid currentColor; outline-offset: var(--ring-offset); }
+a { text-underline-offset: 2px; }
