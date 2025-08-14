@@ -13,3 +13,7 @@
 - [TODO](docs/TODO.md)
 - [GLOSSARY](docs/GLOSSARY.md)
 
+
+
+## Автодеплой
+Пуш в ветку `main` запускает GitHub Actions workflow **Deploy to VPS** (см. `.github/workflows/deploy.yml`). Детали и команды — в `docs/OPERATIONS.md`.
